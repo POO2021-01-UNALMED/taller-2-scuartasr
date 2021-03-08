@@ -1,5 +1,5 @@
 package test;
-import java.util.*;
+
 public class Auto {
 	String modelo;
 	int precio;
@@ -18,17 +18,24 @@ public class Auto {
 		}
 		return contador;
 	}
-	public String verificarIntegridad() {
-		boolean integro = false;
-		// Verificación de los asientos
-		for(int i = 0; i < asientos.length; i++) {
-			if(asientos[i] != null) {
-				if (asientos[i].registro == this.registro && this.registro == motor.registro) {
-					integro = true;
+	String verificarIntegridad() {
+		boolean integro = true;
+		
+		// Verificación del registro de asientos 'no nulos'
+		
+		for (int i = 0; i < asientos.length; i++) {
+			if (asientos[i] != null) {
+				if (asientos[i].registro != registro) {
+					integro = false;
 				}
 			}
 		}
-		if(!integro) {
+		
+		// Verificación del registro del motor
+		if (motor.registro != registro) {
+			integro = false;
+		}
+		if(integro) {
 			return "Auto original";
 		}
 		else {
