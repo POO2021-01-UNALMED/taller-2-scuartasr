@@ -19,26 +19,16 @@ public class Auto {
 		return contador;
 	}
 	public String verificarIntegridad() {
-		// Tomar únicamente los elementos no-null de Asientos en la lista sillas
-		List<Asiento> sillas = new ArrayList<Asiento>();
-		for(Asiento sillita: asientos) {
-			if (sillita != null) {
-				sillas.add(sillita);
+		boolean integro = false;
+		// Verificación de los asientos
+		for(int i = 0; i < asientos.length; i++) {
+			if(asientos[i] != null) {
+				if (asientos[i].registro == this.registro && this.registro == motor.registro) {
+					integro = true;
+				}
 			}
 		}
-		// Tomar los registros de las diferentes sillas.
-		int[] registros = new int[sillas.size()];
-		for(int j = 0; j < sillas.size(); j++) {
-			registros[j] = sillas.get(j).registro;
-		}
-		// Definición de un booleando y chequeo de los registros
-		boolean integro = false;		
-		for (int i = 1; i < registros.length; i++) {
-			if (registros[i] == registros[0] && registros[0] == motor.registro && this.registro == motor.registro) {
-				integro = true;
-			}
-		}
-		if (!integro) {
+		if(!integro) {
 			return "Auto original";
 		}
 		else {
