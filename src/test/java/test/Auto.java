@@ -1,5 +1,5 @@
 package test;
-
+import java.util.*;
 public class Auto {
 	String modelo;
 	int precio;
@@ -10,15 +10,27 @@ public class Auto {
 	static int cantidadCreados;
 	
 	int cantidadAsientos() {
-		return asientos.length;		
+		int contador = 0;
+		for (int i = 0; i < asientos.length; i++) {
+			if (asientos[i] != null) {
+				contador++;
+			}					
+		}
+		return contador;
 	}
 	public String verificarIntegridad() {
+		List<Asiento> sillas = new ArrayList<Asiento>();
+		for(Asiento sillita: asientos) {
+			if (sillita != null) {
+				sillas.add(sillita);
+			}
+		}
 		boolean integro = true;
-		if (asientos[0].registro != motor.registro || motor.registro != this.registro) {
+		if (sillas.get(0).registro != motor.registro || motor.registro != this.registro) {
 			integro = false;
 		}
-		for (int i = 0; i < (asientos.length - 1); i++) {
-			if (asientos[i] != asientos[i+1]) {
+		for (int i = 0; i < (sillas.size()-1); i++) {
+			if (sillas.get(i) != sillas.get(i+1)) {
 				integro = false;
 				break;
 			}
@@ -26,6 +38,8 @@ public class Auto {
 		if (integro) {
 			return "Auto original";
 		}
-		else {return "Las piezas no son originales";}
+		else {
+			return "Las piezas no son originales";
+		}
 	}
 }
